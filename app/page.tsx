@@ -67,7 +67,12 @@ export default function Home() {
     () => (classConfirmed ? allCourses.filter((course) => course.className === selectedClass) : []),
     [classConfirmed, selectedClass],
   );
-  const filteredClasses = useMemo(() => scheduleData.classes.filter((name) => name.toLowerCase().includes(classQuery.trim().toLowerCase())), [classQuery]);
+  const filteredClasses = useMemo(() => {
+    const query = classQuery.trim().toLowerCase();
+    const matches = scheduleData.classes.filter((name) => name.toLowerCase().includes(query));
+    if (!classConfirmed) return matches;
+    return matches.sort((a, b) => Number(b === selectedClass) - Number(a === selectedClass));
+  }, [classConfirmed, classQuery, selectedClass]);
   const live = useMemo(() => {
     const day = now.getDay(), minute = now.getHours() * 60 + now.getMinutes();
     const currentPeriod = periods.find((period) => minute >= toMinutes(period.start) && minute < toMinutes(period.end));
