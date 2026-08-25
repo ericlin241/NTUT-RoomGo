@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     icon: [{ url: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg', type: 'image/svg+xml' }],
     shortcut: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg',
     apple: [{
-      url: 'https://ericlin241.github.io/NTUT-RoomGo/apple-touch-icon.png',
+      url: 'https://ericlin241.github.io/NTUT-RoomGo/apple-touch-icon-v2.png',
       sizes: '180x180',
       type: 'image/png',
     }],
