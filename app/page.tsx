@@ -27,6 +27,7 @@ export default function Home() {
   const [classQuery, setClassQuery] = useState('');
   const [detail, setDetail] = useState<Course | null>(null);
   const [themeMode, setThemeMode] = useState<ThemeMode>('auto');
+  const [isScrolling, setIsScrolling] = useState(false);
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
@@ -45,6 +46,22 @@ export default function Home() {
     if (themeMode === 'auto') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.dataset.theme = themeMode;
   }, [themeMode]);
+
+  useEffect(() => {
+    let scrollEnd: number | undefined;
+    const handleScroll = () => {
+      setIsScrolling(true);
+      if (scrollEnd) window.clearTimeout(scrollEnd);
+      scrollEnd = window.setTimeout(() => setIsScrolling(false), 180);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll, { capture: true });
+      window.removeEventListener('touchmove', handleScroll);
+      if (scrollEnd) window.clearTimeout(scrollEnd);
+    };
+  }, []);
 
   const courses = useMemo(
     () => (classConfirmed ? allCourses.filter((course) => course.className === selectedClass) : []),
@@ -86,7 +103,7 @@ export default function Home() {
       <section className="schedule-section" id="schedule"><div className="section-heading"><div><span className="eyebrow">WEEKLY SCHEDULE</span><h2>本週課表</h2></div><div className="legend"><span><i className="legend-dot mint" />班級課程</span><span>共 {courses.length} 筆課程</span></div></div><div className="schedule-scroll"><div className="schedule-grid"><div className="grid-corner">時間</div>{weekdays.map((day, index) => <div className={`day-head ${now.getDay() === index + 1 ? 'today' : ''}`} key={day}><span>{day}</span><small>{getDateLabel(index + 1)}</small></div>)}{periods.map((period) => <div className="grid-row" key={period.id}><div className="time-cell"><strong>{period.id}</strong><span>{period.start}<br />{period.end}</span></div>{weekdays.map((_, dayIndex) => { const course = courses.find((item) => item.day === dayIndex + 1 && item.start === period.id); return <div className="slot" key={dayIndex}>{course && <button className={`course-card ${course.color}`} style={{ height: `calc(${course.end - course.start + 1} * var(--row-height) - 8px)` }} onClick={() => setDetail(course)}><strong>{course.name}</strong><span><MapPin size={13} /> {course.room}</span><em>{course.className}</em></button>}</div>; })}</div>)}</div></div><p className="data-note"><Info size={14} /> 此為 115-1 靜態班級課表，不包含個人跨系選修、通識及加退選結果。</p></section>
     </main>
 
-    <nav className="mobile-nav" aria-label="主要導覽"><a href="#schedule" className="active"><BookOpen size={20} /><span>課表</span></a><a href="#status"><Clock3 size={20} /><span>即時</span></a><button onClick={() => setClassPickerOpen(true)}><Users size={20} /><span>班級</span></button><button onClick={cycleTheme} aria-label={`目前主題：${themeLabel}，點擊切換`}>{themeIcon}<span>{themeLabel}</span></button></nav>
+    <nav className={`mobile-nav${isScrolling ? ' is-scrolling' : ''}`} aria-label="主要導覽"><a href="#schedule" className="active"><BookOpen size={20} /><span>課表</span></a><a href="#status"><Clock3 size={20} /><span>即時</span></a><button onClick={() => setClassPickerOpen(true)}><Users size={20} /><span>班級</span></button><button onClick={cycleTheme} aria-label={`目前主題：${themeLabel}，點擊切換`}>{themeIcon}<span>{themeLabel}</span></button></nav>
 
     {classPickerOpen && <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="class-title"><div className="modal class-modal"><div className="modal-icon"><Users size={23} /></div>{classConfirmed && <button className="modal-close" onClick={() => setClassPickerOpen(false)} aria-label="關閉"><X size={20} /></button>}<span className="eyebrow">STATIC SCHEDULE</span><h2 id="class-title">選擇你的班級</h2><p>搜尋系所、年級或班別；選好後會保存在這台裝置，下次自動載入。</p><label className="search-box"><Search size={18} /><input value={classQuery} onChange={(event) => setClassQuery(event.target.value)} placeholder="搜尋班級，例如：電機三" /></label><div className="class-list">{filteredClasses.map((name) => <button key={name} onClick={() => chooseClass(name)} className={classConfirmed && name === selectedClass ? 'selected' : ''}><span><strong>{name}</strong><small>115-1 靜態班級課表</small></span>{classConfirmed && name === selectedClass && <Check size={18} />}</button>)}{!filteredClasses.length && <div className="no-result">找不到符合的班級，請嘗試其他關鍵字</div>}</div></div></div>}
 
