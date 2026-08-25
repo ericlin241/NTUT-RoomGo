@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>北科課室通 NTUT RoomGo｜即時課表與教室查詢</title>
+  <meta name="description" content="選擇班級並載入北科大班級課表，快速查看當下課程、下一節課與教室。" />
+  <meta property="og:title" content="北科課室通 NTUT RoomGo" />
+  <meta property="og:description" content="現在在哪上課？下一堂在哪？打開 RoomGo，一眼就知道。" />
+  <meta property="og:image" content="public/og.png" />
+  <style>
+    :root{color-scheme:dark;--bg:#111415;--surface:#191d1f;--line:rgba(255,255,255,.09);--text:#f5f6f2;--muted:#939b9a;--accent:#b8f46a;--ink:#17220c}*{box-sizing:border-box}body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 70% 0,rgba(184,244,106,.11),transparent 30%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}.card{width:min(590px,100%);padding:38px;border:1px solid var(--line);border-radius:28px;background:var(--surface);box-shadow:0 30px 90px rgba(0,0,0,.34)}.logo{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:var(--accent);color:var(--ink);font-size:24px}.eyebrow{display:block;margin-top:28px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em}.card h1{margin:10px 0 12px;font-size:clamp(28px,6vw,42px);line-height:1.16;letter-spacing:-.04em}.card>p{margin:0;color:var(--muted);font-size:14px;line-height:1.75}.steps{display:grid;gap:9px;margin:26px 0}.step{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#202527}.step b{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:9px;background:var(--accent);color:var(--ink);font-size:12px}.step code{font-size:13px}.open{display:block;margin-top:18px;padding:14px;border-radius:14px;background:var(--accent);color:var(--ink);text-align:center;text-decoration:none;font-weight:800}.note{margin-top:18px!important;font-size:11px!important}@media(max-width:520px){.card{padding:27px;border-radius:23px}}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">▦</div>
+    <span class="eyebrow">NTUT ROOMGO</span>
+    <h1>請啟動 RoomGo 網站服務</h1>
+    <p>RoomGo 使用本機靜態班級資料庫與瀏覽器快取。請在此資料夾開啟終端機：</p>
+    <div class="steps"><div class="step"><b>1</b><code>npm install</code></div><div class="step"><b>2</b><code>npm run dev</code></div></div>
+    <a class="open" href="http://localhost:3000">開啟 http://localhost:3000</a>
+    <p class="note">不需要帳號或密碼。班級偏好只會保存在你的瀏覽器，不會寫進專案或 GitHub。</p>
+  </main>
+</body>
+</html>
