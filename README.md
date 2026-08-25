@@ -4,6 +4,8 @@
 
 北科課室通是為國立臺北科技大學學生設計的響應式班級課表與教室查詢 Web App。選擇班級後，即可快速查看當下課程、下一節課、完整週課表與課程教室資訊。
 
+**網站：[立即開啟 NTUT RoomGo](https://ericlin241.github.io/NTUT-RoomGo/)**
+
 ![北科課室通 NTUT RoomGo 預覽](public/og.png)
 
 ## 主要功能
@@ -59,6 +61,7 @@ npm run dev
 | `npm run dev` | 啟動本機開發環境 |
 | `npm run lint` | 檢查程式碼品質 |
 | `npm run build` | 建立正式版本 |
+| `npm run build:pages` | 建立 GitHub Pages 靜態版本 |
 | `npm run start` | 啟動正式版本 |
 | `npm run scrape` | 重新爬取公開課表並更新 JSON 資料 |
 | `npm run build:standalone` | 更新根目錄的啟動說明頁 |
@@ -111,6 +114,12 @@ NTUT-RoomGo/
 - Tailwind CSS
 - Lucide React
 - Cheerio
+
+## GitHub Pages
+
+每次推送到 `main` 分支後，GitHub Actions 會自動建立靜態版本並發布至：
+
+<https://ericlin241.github.io/NTUT-RoomGo/>
 
 ## 儲存與隱私
 
