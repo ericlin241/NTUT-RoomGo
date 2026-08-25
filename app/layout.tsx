@@ -10,7 +10,20 @@ export const metadata: Metadata = {
   title: '北科課室通 NTUT RoomGo｜即時課表與教室查詢',
   description: '北科大學生專屬的即時課表、下一節課與教室資訊查詢工具。快速、清楚，手機與電腦都好用。',
   keywords: ['北科大', 'NTUT', '課表', '教室查詢', 'RoomGo'],
-  icons: { icon: [{ url: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg', type: 'image/svg+xml' }], shortcut: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg' },
+  icons: {
+    icon: [{ url: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: 'https://ericlin241.github.io/NTUT-RoomGo/favicon.svg',
+    apple: [{
+      url: 'https://ericlin241.github.io/NTUT-RoomGo/apple-touch-icon.png',
+      sizes: '180x180',
+      type: 'image/png',
+    }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: '北科課室通',
+    statusBarStyle: 'black-translucent',
+  },
   openGraph: { title: '北科課室通 NTUT RoomGo', description: '現在在哪上課？下一堂在哪？打開 RoomGo，一眼就知道。', type: 'website', locale: 'zh_TW', url: 'https://ericlin241.github.io/NTUT-RoomGo/', images: [{ url: 'https://ericlin241.github.io/NTUT-RoomGo/og.png', width: 1200, height: 630, alt: '北科課室通 NTUT RoomGo 預覽圖' }] },
   twitter: { card: 'summary_large_image', title: '北科課室通 NTUT RoomGo', description: '北科大即時課表與教室查詢，一眼掌握下一堂課。', images: ['https://ericlin241.github.io/NTUT-RoomGo/og.png'] },
 };
