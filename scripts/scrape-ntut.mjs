@@ -26,8 +26,10 @@ function parseRoomPage(html, room) {
       const pattern = /\((\d{6})\)\s*\[(\d+)人\]\s*([\s\S]*?)(?=\(\d{6}\)\s*\[|$)/g;
       for (const match of raw.matchAll(pattern)) {
         const lines = match[3].split('\n').map((line) => line.replace(/\s+/g, ' ').trim()).filter(Boolean);
-        if (!lines.length) continue;
-        records.push({ code: match[1], students: Number(match[2]), name: lines[0], className: lines.at(-1), room, day: cellIndex, period, periodIndex: periodOrder.indexOf(period) });
+        if (lines.length < 2) continue;
+        for (const className of [...new Set(lines.slice(1))]) {
+          records.push({ code: match[1], students: Number(match[2]), name: lines[0], className, room, day: cellIndex, period, periodIndex: periodOrder.indexOf(period) });
+        }
       }
     });
   });
